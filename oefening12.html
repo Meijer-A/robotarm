@@ -8,24 +8,31 @@
             var robotArm = new RobotArm(canvas);
 
             // Het level inladen
-            robotArm.randomLevel(1, 7);
+           robotArm.randomLevel(1,7);
 
             // Jou instructies volgen hier
-            for (var a = 0; a < 10; a++) {
-              var pak = robotArm.grab();
-
-              if (pak == null)  {
-                robotArm.moveRight();
-                robotArm.drop();
+            var color = 1;
+            var count = 0;
+            while (color != null) {
+              robotArm.grab();
+              color = robotArm.scan();
+              for (var i = 0; i < count; i++) {
+              robotArm.moveRight();
+              }
+              robotArm.drop();
+              for (var i = 0; i < count; i++) {
                 robotArm.moveLeft();
-              } else {
-                robotArm.drop();
               }
-              }
+              count++;
+            }
+
+
+
+
 
             // De door jou opgegeven instructies uitvoeren
             robotArm.run();
-            robotArm.speed = 250;
+            robotArm.speed = 600;
         </script>
     </body>
 </html>
